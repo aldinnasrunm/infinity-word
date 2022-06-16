@@ -1,24 +1,32 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Ground here.
+ * Write a description of class Tree0 here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Ground extends Actor
+public class Tree extends Actor
 {
     /**
-     * Act - do whatever the Ground wants to do. This method is called whenever
+     * Act - do whatever the Tree0 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    private GreenfootImage bg0 = new GreenfootImage("background/1.png");
     public void act()
     {
-
-        // Add your action code here.
+        // setImage(bg0);// Add your action code here.
     }
 
-    //make getter 
+
+    public void setBG(GreenfootImage bg){
+        setImage(bg);
+        GreenfootImage imbBg = getImage();
+        imbBg.scale(600,400);
+    }
+
+        //make getter 
     public int getTop(){
         return (getX() - getImage().getHeight()/2)+20;
     }

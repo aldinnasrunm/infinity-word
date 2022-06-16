@@ -12,23 +12,63 @@ public class player extends Actor
      * Act - do whatever the player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    scrollingWorld world = (scrollingWorld) getWorld();
+    private int fSpeed = 0;
+    private int acceleration = 1;
+    private int speed = 4;
+
     public void act()
     {
         GreenfootImage img = getImage();
         img.scale(48,48);
         setImage(img);
-        // Add your action code here.
-        if(Greenfoot.isKeyDown("right"))
-            setLocation(getX()+2, getY());
-        else if(Greenfoot.isKeyDown("left"))
-            setLocation(getX()-2, getY()); 
-        if(Greenfoot.isKeyDown("up"))
-            setLocation(getX(), getY()-2);
-        else if(Greenfoot.isKeyDown("down"))
-            setLocation(getX(), getY()+2); 
             
-        if(Greenfoot.isKeyDown("space")){
-           // shoot();
+        scrollingWorld world = (scrollingWorld) getWorld(); 
+        if(Greenfoot.isKeyDown("left")){
+            if(getX() >= img.getWidth()/2 + 40){
+                move(-speed);
+            }else{
+                world.scrollGround(speed);
+                 world.paralaxBackground(speed);
+
+            }
+        }else if(Greenfoot.isKeyDown("right")){
+           if(getX() <= (world.getWidth() - img.getWidth()/2-40)){
+                 move(speed);
+            }else{
+                 world.scrollGround(-speed);
+                 world.paralaxBackground(-speed);
+            }
         }
+        if(Greenfoot.isKeyDown("up")){
+            if(getY()> world.getHeight()/2){
+                setLocation(getX(), getY()-speed*2);
+            }
+            
+        }
+        chekFall();
+        }
+
+        public void chekFall(){
+            if(onGround()){
+                fSpeed = 0;
+            }else{
+                makeGrafity();
+            }
+        }
+
+
+        public boolean onGround(){
+            // Actor below = getOneObjectAtOffset(0, getImage().getHeight()/2 -4, Ground.class);
+            boolean below = isTouching(Ground.class);
+            return below;
+        }
+
+ 
+        void makeGrafity(){
+            setLocation(getX(), getY() + fSpeed);
+            fSpeed = fSpeed + acceleration;
+        }
+
     }
-}
+
