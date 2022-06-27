@@ -32,21 +32,33 @@ public class player extends Actor
                     move(-speed);
                     
                 }else{
-                    scrollingWorld.movement = speed;
-                    world.scrollGround(speed);
-                    world.paralaxBackground(speed);
+                        if(scrollingWorld.actorMovement > -400){
+                        scrollingWorld.movement = speed;
+                        world.scrollGround(speed);
+                        world.paralaxBackground(speed);    
+                        }else{
+                            scrollingWorld.movement = 0;  
+                            world.scrollGround(0);
+                            world.paralaxBackground(0);
+                        }
                 }
             }
         }else if(Greenfoot.isKeyDown("right")){
             scrollingWorld.counter.setValue(scrollingWorld.actorMovement);
             if(scrollingWorld.actorMovement < 400){
                 scrollingWorld.actorMovement += speed;
-                if(getX() <= (world.getWidth() - img.getWidth()/2-40) && scrollingWorld.actorMovement < 1000 ){
+                if(getX() <= (world.getWidth() - img.getWidth()/2-40)){
                     move(speed);
                     }else{
-                        scrollingWorld.movement = -speed;  
-                        world.scrollGround(-speed);
-                        world.paralaxBackground(-speed);
+                        if(scrollingWorld.actorMovement < 400){
+                            scrollingWorld.movement = -speed;  
+                            world.scrollGround(-speed);
+                            world.paralaxBackground(-speed);
+                        }else{
+                            scrollingWorld.movement = 0;  
+                            world.scrollGround(0);
+                            world.paralaxBackground(0);
+                        }
                     }
             }
         }else{

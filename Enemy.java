@@ -18,7 +18,6 @@ public class Enemy extends Actor
         int mv = scrollingWorld.movement;
         move(mv + (-1));    
         
-        
     }
 
 
