@@ -25,22 +25,26 @@ public class player extends Actor
         
         scrollingWorld world = (scrollingWorld) getWorld(); 
         if(Greenfoot.isKeyDown("left")){
-            if(getX() >= img.getWidth()/2 + 40){
-                move(-speed);
-                
-            }else{
-                scrollingWorld.movement = speed;
-                world.scrollGround(speed);
-                 world.paralaxBackground(speed);
-
+            if(scrollingWorld.actorMovement > -500){
+                scrollingWorld.actorMovement -= speed;
+                if(getX() >= img.getWidth()/2 + 40 ){
+                    move(-speed);
+                }else{
+                    scrollingWorld.movement = speed;
+                    world.scrollGround(speed);
+                    world.paralaxBackground(speed);
+                }
             }
         }else if(Greenfoot.isKeyDown("right")){
-           if(getX() <= (world.getWidth() - img.getWidth()/2-40)){
-               move(speed);
-            }else{
-               scrollingWorld.movement = -speed;  
-                 world.scrollGround(-speed);
-                 world.paralaxBackground(-speed);
+            if(scrollingWorld.actorMovement < 500){
+                scrollingWorld.actorMovement += speed;
+                if(getX() <= (world.getWidth() - img.getWidth()/2-40) && scrollingWorld.actorMovement < 1000 ){
+                    move(speed);
+                    }else{
+                        scrollingWorld.movement = -speed;  
+                        world.scrollGround(-speed);
+                        world.paralaxBackground(-speed);
+                    }
             }
         }else{
                 scrollingWorld.movement = 0;
@@ -65,7 +69,7 @@ public class player extends Actor
 
         public boolean onGround(){
             // Actor below = getOneObjectAtOffset(0, getImage().getHeight()/2 -4, Ground.class);
-            boolean below = isTouching(Ground.class);
+            boolean below = isTouching(GroundLong.class);
             return below;
         }
 

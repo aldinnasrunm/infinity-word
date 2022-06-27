@@ -21,8 +21,9 @@ public class scrollingWorld extends World
     private GreenfootImage bg2 = new GreenfootImage("bg/3.png");
     private GreenfootImage bg3 = new GreenfootImage("bg/4.png");
     private GreenfootImage bg4 = new GreenfootImage("bg/5.png");
-    
-    public static int movement;
+    private GroundLong groundlong =  new GroundLong();
+    public static int movement = 0;
+    public static int actorMovement = 0;
     public static final int WIDE = 600; // world width (viewport)
     public static final int HIGH = 400; // world height (viewport)
 
@@ -36,7 +37,7 @@ public class scrollingWorld extends World
         
     private ArrayList<Tree>trees = new ArrayList<Tree>();
     private ArrayList<Tree1>treeFronts = new ArrayList<Tree1>(); 
-
+    //static Counter counter = new Counter();
     static Tree tree1, tree2, tree3, tree4, tree5, tree1F, tree1L, tree2F, tree2L ;
     Tree1 treeFront;
     private ArrayList<Ground> grounds = new ArrayList<Ground>();
@@ -46,7 +47,7 @@ public class scrollingWorld extends World
     public scrollingWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(600, 400, 1, false); 
         prepare();
     }
     
@@ -77,25 +78,28 @@ public class scrollingWorld extends World
         //create paralax bg 5
 
         //create new ground
-        addObject(new Ground(),getWidth()/2, getHeight()-20);
-        int x,y;
-        Ground ground = new Ground();
-        x = ground.getWidth()/2;
-        y = getHeight()-ground.getHeight()/2;
-        addObject(ground,x,y);
-        grounds.add(ground);
-        first = ground;
+        // addObject(new Ground(),getWidth()/2, getHeight()-20);
+        // int x,y;
+        // Ground ground = new Ground();
+        // x = ground.getWidth()/2;
+        // y = getHeight()-ground.getHeight()/2;
+        // addObject(ground,x,y);
+        // grounds.add(ground);
+        // first = ground;
 
-        ground = new Ground();
-        addObject(ground, x+ground.getWidth(), y);
-        grounds.add(ground);
-        last = ground;
+        // ground = new Ground();
+        // addObject(ground, x+ground.getWidth(), y);
+        // grounds.add(ground);
+        // last = ground;
 
+        addObject(groundlong, 0, getHeight()-20);
         addObject(new player(), 300, 200);
         addObject(new Enemy(),600, 200);
 
+        setPaintOrder(player.class, GroundLong.class);
         
-        setPaintOrder(player.class, Ground.class);
+       // addObject(counter,72,37);
+        // counter.setValue(actorMovement);
     }
 
     
@@ -124,22 +128,29 @@ public class scrollingWorld extends World
 
     }
 
-    public void scrollGround(int dx){
+    // public void scrollGround(int dx){
         
-        if(tree5.getX() != 599 && tree5.getX() != 0){
-            for(Ground ground : grounds){
-            ground.move(dx);
-        }
-             if(first.getLeft() > 0){
-                addGround(false);
-            }
-            if(last.getRight() < getWidth()){
-                addGround(true);
-            }
-        }
+    //     if(tree5.getX() != 599 && tree5.getX() != 0){
+    //         for(Ground ground : grounds){
+    //         ground.move(dx);
+    //     }
+    //          if(first.getLeft() > 0){
+    //             addGround(false);
+    //         }
+    //         if(last.getRight() < getWidth()){
+    //             addGround(true);
+    //         }
+    //     }
 
        
+    // }
+
+
+  public void scrollGround(int dx){
+        groundlong.move(dx);
+       
     }
+
 
     public void paralaxBackground(int dx){
         trees.add(tree1);

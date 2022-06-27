@@ -16,10 +16,20 @@ public class Enemy extends Actor
     {
         // Add your action code here.
         int mv = scrollingWorld.movement;
-
-        if(getX() > 0){
-            move(mv + (-1));    
-        }
+        move(mv + (-1));    
         
+        
+    }
+
+
+    public void setPending(int pendingValue){
+        
+        
+        if(pendingValue == 0){
+
+        }else{
+            
+        }
+
     }
 }
