@@ -37,7 +37,9 @@ public class scrollingWorld extends World
         
     private ArrayList<Tree>trees = new ArrayList<Tree>();
     private ArrayList<Tree1>treeFronts = new ArrayList<Tree1>(); 
-    //static Counter counter = new Counter();
+    static Counter counter = new Counter();
+    static Counter counter2 = new Counter();
+
     static Tree tree1, tree2, tree3, tree4, tree5, tree1F, tree1L, tree2F, tree2L ;
     Tree1 treeFront;
     private ArrayList<Ground> grounds = new ArrayList<Ground>();
@@ -52,6 +54,7 @@ public class scrollingWorld extends World
     }
     
     void prepare(){
+        actorMovement = 0;
         //create paralax bg 
 
         tree1 = new Tree();
@@ -98,8 +101,9 @@ public class scrollingWorld extends World
 
         setPaintOrder(player.class, GroundLong.class);
         
-       // addObject(counter,72,37);
-        // counter.setValue(actorMovement);
+        addObject(counter,72,37);
+        addObject(counter2,72,60);
+        counter.setValue(actorMovement);
     }
 
     
@@ -153,17 +157,24 @@ public class scrollingWorld extends World
 
 
     public void paralaxBackground(int dx){
+
+        counter2.setValue(dx);
+
         trees.add(tree1);
         trees.add(tree2);
         trees.add(tree3);
         trees.add(tree4);
         trees.add(tree5);
 
+        if(dx > 0){
             trees.get(4).setLocation(trees.get(4).getX()+dx-1, trees.get(4).getY());
-        if(tree5.getX() != 599 && tree5.getX() != 0){
             trees.get(3).setLocation(trees.get(3).getX()+dx-2, trees.get(3).getY());
             trees.get(2).setLocation(trees.get(2).getX()+dx-3, trees.get(2).getY());
-         }
+        }else{
+            trees.get(4).setLocation(trees.get(4).getX()+dx+1, trees.get(4).getY());
+            trees.get(3).setLocation(trees.get(3).getX()+dx+2, trees.get(3).getY());
+            trees.get(2).setLocation(trees.get(2).getX()+dx+3, trees.get(2).getY());
+        }
 
         // if(tree5.getX() < 300 && tree5.getX() > 190 ){
         //     // addTree(true,tree5.getRight() + tree5.getWidth(),tree5.getY());
