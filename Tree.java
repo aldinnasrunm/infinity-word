@@ -23,7 +23,7 @@ public class Tree extends Actor
     public void setBG(GreenfootImage bg){
         setImage(bg);
         GreenfootImage imbBg = getImage();
-        imbBg.scale(600,400);
+        imbBg.scale(2000,400);
     }
 
         //make getter 

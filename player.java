@@ -22,23 +22,28 @@ public class player extends Actor
         GreenfootImage img = getImage();
         img.scale(48,48);
         setImage(img);
-            
+        
         scrollingWorld world = (scrollingWorld) getWorld(); 
         if(Greenfoot.isKeyDown("left")){
             if(getX() >= img.getWidth()/2 + 40){
                 move(-speed);
+                
             }else{
+                scrollingWorld.movement = speed;
                 world.scrollGround(speed);
                  world.paralaxBackground(speed);
 
             }
         }else if(Greenfoot.isKeyDown("right")){
            if(getX() <= (world.getWidth() - img.getWidth()/2-40)){
-                 move(speed);
+               move(speed);
             }else{
+               scrollingWorld.movement = -speed;  
                  world.scrollGround(-speed);
                  world.paralaxBackground(-speed);
             }
+        }else{
+                scrollingWorld.movement = 0;
         }
         if(Greenfoot.isKeyDown("up")){
             if(getY()> world.getHeight()/2){
