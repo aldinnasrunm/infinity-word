@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class player extends Actor
+public class player extends SmoothMover
 {
     /**
      * Act - do whatever the player wants to do. This method is called whenever
@@ -29,6 +29,7 @@ public class player extends Actor
                 scrollingWorld.actorMovement -= speed;
                 if(getX() >= img.getWidth()/2 + 40 ){
                     move(-speed);
+                    
                 }else{
                     scrollingWorld.movement = speed;
                     world.scrollGround(speed);
